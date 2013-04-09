@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
-public class Chapter_08_ImproveReadability_UserDrivenBehavior.java {
+public class Chapter_08_ImproveReadability_UserDrivenBehavior {
 // Using Pagestore
 
     // Use the application driver

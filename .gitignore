@@ -1,0 +1,12 @@
+.idea/
+CT.iml
+out/
+lib/.DS_Store
+.classpath
+*.class
+.DS_Store
+bin
+test-output/
+.project
+.settings/
+chromedriver.log
