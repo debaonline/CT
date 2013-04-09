@@ -3,35 +3,35 @@ package scenarios;
 import domain.JourneyDetails;
 import domain.JourneyDetailsBuilder;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import page.LandingPage;
 import spec.SpecDefinition;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
-public class Chapter_08_ImproveReadability_UserDrivenBehavior {
+public class Chapter_08_ImproveReadability_UserDrivenBehavior.java {
+// Using Pagestore
 
     // Use the application driver
     WebDriver driver;
-    LandingPage onLandingPage;
 
     SpecDefinition user ;
-
+    PageStore pageStore;
 
 
     @BeforeMethod
       public void setup(){
-        //launch the application under test
-        driver = new AppDriver().getDriver();
-        driver.get("http://www.cleartrip.com/");
-        onLandingPage = PageFactory.initElements(driver, LandingPage.class);
 
-        user = new SpecDefinition(onLandingPage);
+        // initialize driver
+        pageStore = new PageStore();
+        user = new SpecDefinition(pageStore);
+
+        //launch the application under test
+        driver = pageStore.getDriver();
+        driver.get("http://www.cleartrip.com/");
 
         user.choosesToDoAFlightSearch();
     }
@@ -70,7 +70,7 @@ public class Chapter_08_ImproveReadability_UserDrivenBehavior {
     @AfterMethod
     public void teardown(){
         //close the browser
-        driver.close();
+        pageStore.destroy();
 
     }
 

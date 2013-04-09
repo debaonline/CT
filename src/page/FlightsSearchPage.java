@@ -93,12 +93,7 @@ public class FlightsSearchPage {
         originOptions.get(0).click();
     }
 
-    public SearchResultsPage searchForTheJourney() {
-        searchButton.click();
-        return new SearchResultsPage(driver);
-    }
-
-    public SearchResultsPage searchForAOneWayJourneyWith(JourneyDetails journeyDetails) {
+    public void searchForAOneWayJourneyWith(JourneyDetails journeyDetails) {
         this.chooseToHaveAOneWayJourney();
 
         this.enterOriginAs("Bangalore");
@@ -108,12 +103,10 @@ public class FlightsSearchPage {
         this.selectTheFirstAvailableAutoCompleteOption();
 
         this.enterDepartureDateAs(journeyDetails.getDepartureDate());
-        SearchResultsPage searchResultsPage = this.searchForTheJourney();
-        return searchResultsPage;
-
+        searchButton.click();
     }
 
-    public SearchResultsPage searchForAReturnJourneyWith(JourneyDetails journeyDetails) {
+    public void searchForAReturnJourneyWith(JourneyDetails journeyDetails) {
         this.chooseToHaveAReturnJourney();
 
         this.enterOriginAs("Bangalore");
@@ -124,8 +117,7 @@ public class FlightsSearchPage {
 
         this.enterDepartureDateAs(journeyDetails.getDepartureDate());
         this.enterReturnDateAs(journeyDetails.getReturnDate());
-        SearchResultsPage searchResultsPage = this.searchForTheJourney();
-        return searchResultsPage;
+        searchButton.click();
     }
 
 

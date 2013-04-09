@@ -3,7 +3,6 @@ package page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 
 public class LandingPage {
@@ -19,9 +18,7 @@ public class LandingPage {
 
 
 
-    public FlightsSearchPage goToFlightsSearchPage() {
+    public void goToFlightsSearchPage() {
         flightsPageLink.click();
-        FlightsSearchPage flightsSearchPage = PageFactory.initElements(driver, FlightsSearchPage.class);
-        return flightsSearchPage;
     }
 }

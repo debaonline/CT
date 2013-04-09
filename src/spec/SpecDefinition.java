@@ -5,6 +5,7 @@ import org.testng.Assert;
 import page.FlightsSearchPage;
 import page.LandingPage;
 import page.SearchResultsPage;
+import scenarios.PageStore;
 
 
 public class SpecDefinition {
@@ -13,36 +14,41 @@ public class SpecDefinition {
     LandingPage onLandingPage;
     FlightsSearchPage onFlightsSearchPage;
     SearchResultsPage onResultsPage;
+    PageStore pageStore;
+
+
+    public SpecDefinition(PageStore pageStore) {
+        this.pageStore = pageStore;
+    }
+
 
     public SpecDefinition(LandingPage onLandingPage) {
         this.onLandingPage = onLandingPage;
     }
 
-    public SpecDefinition searchesForAOneWayJourneyWith(JourneyDetails journeyDetails) {
-        onResultsPage = onFlightsSearchPage.searchForAOneWayJourneyWith(journeyDetails);
-        return this;
+    public void searchesForAOneWayJourneyWith(JourneyDetails journeyDetails) {
+        FlightsSearchPage onFlightsSearchPage = pageStore.get(FlightsSearchPage.class);
+        onFlightsSearchPage.searchForAOneWayJourneyWith(journeyDetails);
     }
 
 
-    public SpecDefinition hasJourneyOptionsAvailableForHisOutboundJourney() {
-        Assert.assertTrue(onResultsPage.resultsAppearForOutboundJourney());
-        return this;
+    public void hasJourneyOptionsAvailableForHisOutboundJourney() {
+        Assert.assertTrue(pageStore.get(SearchResultsPage.class).resultsAppearForOutboundJourney());
     }
 
-    public SpecDefinition searchesForAReturnJourneyWith(JourneyDetails journeyDetails) {
-        onResultsPage = onFlightsSearchPage.searchForAReturnJourneyWith(journeyDetails);
-        return this;
+    public void searchesForAReturnJourneyWith(JourneyDetails journeyDetails) {
+        FlightsSearchPage onFlightsSearchPage = pageStore.get(FlightsSearchPage.class);
+        onFlightsSearchPage.searchForAReturnJourneyWith(journeyDetails);
     }
 
-    public SpecDefinition hasJourneyOptionsAvailableForTheReturnJourney() {
+    public void hasJourneyOptionsAvailableForTheReturnJourney() {
+        SearchResultsPage onResultsPage = pageStore.get(SearchResultsPage.class);
         Assert.assertTrue(onResultsPage.resultsAppearForOutboundJourney());
         Assert.assertTrue(onResultsPage.resultsAppearForInboundJourney());
-        return this;
     }
 
-    public SpecDefinition choosesToDoAFlightSearch() {
-        onFlightsSearchPage = onLandingPage.goToFlightsSearchPage();
-        return this;
-
+    public void choosesToDoAFlightSearch() {
+        LandingPage onLandingPage = pageStore.get(LandingPage.class);
+        onLandingPage.goToFlightsSearchPage();
     }
 }
