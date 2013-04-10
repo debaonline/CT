@@ -13,18 +13,17 @@ import java.util.Calendar;
 
 
 public class Chapter_08_ImproveReadability_UserDrivenBehavior {
-// Using Pagestore
 
     // Use the application driver
     WebDriver driver;
+    PageStore pageStore;
 
     SpecDefinition user ;
-    PageStore pageStore;
+
 
 
     @BeforeMethod
       public void setup(){
-
         // initialize driver
         pageStore = new PageStore();
         user = new SpecDefinition(pageStore);
@@ -33,7 +32,7 @@ public class Chapter_08_ImproveReadability_UserDrivenBehavior {
         driver = pageStore.getDriver();
         driver.get("http://www.cleartrip.com/");
 
-        user.choosesToDoAFlightSearch();
+        given(user).choosesToDoAFlightSearch();
     }
 
     @Test
@@ -45,10 +44,8 @@ public class Chapter_08_ImproveReadability_UserDrivenBehavior {
                 withDepartureDate(tomorrow()).build();
 
 
-        user.searchesForAOneWayJourneyWith(journeyDetails);
-        user.hasJourneyOptionsAvailableForHisOutboundJourney();
-
-
+        when(user).searchesForAOneWayJourneyWith(journeyDetails);
+        then(user).hasJourneyOptionsAvailableForHisOutboundJourney();
     }
 
 
@@ -60,8 +57,8 @@ public class Chapter_08_ImproveReadability_UserDrivenBehavior {
                 withOrigin("Bangalore").withDestination("Delhi").
                 withDepartureDate(tomorrow()).withReturnDate(dayAfterTomorrow()).build();
 
-        user.searchesForAReturnJourneyWith(journeyDetails);
-        user.hasJourneyOptionsAvailableForTheReturnJourney();
+        when(user).searchesForAReturnJourneyWith(journeyDetails);
+        then(user).hasJourneyOptionsAvailableForTheReturnJourney();
 
 
     }
@@ -87,6 +84,22 @@ public class Chapter_08_ImproveReadability_UserDrivenBehavior {
         return new SimpleDateFormat("dd/MM/yyyy").format(c.getTime());
     }
 
+
+    protected <T extends SpecDefinition> T given(T dsl) {
+        return dsl;
+    }
+
+    protected <T extends SpecDefinition> T when(T dsl) {
+        return dsl;
+    }
+
+    protected <T extends SpecDefinition> T then(T dsl) {
+        return dsl;
+    }
+
+    protected <T extends SpecDefinition> T and(T dsl) {
+        return dsl;
+    }
 
 
 }
